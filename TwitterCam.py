@@ -18,18 +18,21 @@ class TwitterCam(object):
 			command.append('-a')
 		return command
 
-	def start(self):
-
-		#excecute command
-		outputFileName = subprocess.check_output(self.command)
-		outputFileName = outputFileName.strip()
-
-		#tweet
-		ouputFile = open(outputFileName, 'rb')
-		twitter.update_status_with_media(status='Testing '+str(animated), media=ouputFile)
-
-		print "done!"
+	@property
+	def fileName(self):
+		if self.animated:
+			return 'output.gif'
+		else:
+			return 'output.jpg'
+	    	
+	def tweet(self):
+		subprocess.check_output(self.command)
+		ouputFile = open(self.fileName, 'rb')
+		self.twitter_obj.update_status_with_media(status='Testing: using rPi GPIO input (animated:'+str(self.animated)+')', media=ouputFile)
+		print "done uploading!"
 
 	def test(self):
 		print self.command;
-		#twitter.update_status(status='Test debug')
+		#print self.twitter_obj.verify_credentials()
+		#print APP_KEY
+		#self.twitter_obj.update_status(status='Test debug')

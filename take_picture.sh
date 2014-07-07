@@ -26,24 +26,19 @@ take_animated()
 		-f video4linux2 \
 		-i /dev/video0 \
 		-vf scale=320:-1 \
-		-t 2 \
+		-t 3 \
 		-vcodec gif \
-		video%03d.jpg \
-		> /dev/null 2>&1
+		video%03d.jpg
 
 	#converto screenshots to gif
 	convert \
 		-delay 10 \
 		-loop 0 \
 		video*.jpg \
-		$OUTPUT_FILE_ANIMATED \
-		> /dev/null 2>&1
+		$OUTPUT_FILE_ANIMATED
 
 	#remove screenshots
 	rm -r video*.jpg
-
-	#return
-	echo $OUTPUT_FILE_ANIMATED
 }
 
 take_photo()
@@ -52,11 +47,7 @@ take_photo()
 		-r 640x480 \
 		--jpeg 80 \
 		--no-banner \
-		$OUTPUT_FILE \
-		> /dev/null 2>&1
-
-	#return
-	echo $OUTPUT_FILE
+		$OUTPUT_FILE
 }
 
 #make target dir
