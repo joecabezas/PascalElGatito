@@ -26,7 +26,10 @@ class TwitterCam(object):
 			return 'output.jpg'
 	    	
 	def tweet(self):
+		print 'capturing...'
 		subprocess.check_output(self.command)
+		print 'capture done!'
+		print 'uploading...'
 		ouputFile = open(self.fileName, 'rb')
 		self.twitter_obj.update_status_with_media(status='Testing: using rPi GPIO input (animated:'+str(self.animated)+')', media=ouputFile)
 		print "done uploading!"
