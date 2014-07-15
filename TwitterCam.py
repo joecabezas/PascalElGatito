@@ -10,7 +10,7 @@ class TwitterCam(object):
 	def __init__(self, a_animated):
 		self.twitter_obj = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 		self.animated = a_animated
-	
+
 	@property
 	def command(self):
 		command = 'sh take_picture.sh'.split()
@@ -24,7 +24,7 @@ class TwitterCam(object):
 			return 'output.gif'
 		else:
 			return 'output.jpg'
-	    	
+
 	def tweet(self):
 		print 'capturing...'
 		subprocess.check_output(self.command)
@@ -36,6 +36,3 @@ class TwitterCam(object):
 
 	def test(self):
 		print self.command;
-		#print self.twitter_obj.verify_credentials()
-		#print APP_KEY
-		#self.twitter_obj.update_status(status='Test debug')
